@@ -1,9 +1,9 @@
 name: cipipeline
 on: 
   push: 
-  branches["main"]
+  branches[ "main" ]
   pull:
-  branches["main"]
+  branches[ "main" ]
 
   workflow_dispatch:
 
