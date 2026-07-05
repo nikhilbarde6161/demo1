@@ -15,6 +15,13 @@ jobs:
          - name: print hello
            run: echo "hello world"
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - run: npm test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./deploy.sh
+      
