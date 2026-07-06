@@ -28,26 +28,26 @@ jobs:
           path: |
             index.html
 
-deployment:
-  needs: ci-job
-  runs-on: ubuntu-latest
+  deployment:
+    needs: ci-job
+    runs-on: ubuntu-latest
   
-  steps:
-    - name: download artifacts
-      uses: actions/download-artifact@v4
-      with: 
-        name: website-file
+    steps:
+      - name: download artifacts
+        uses: actions/download-artifact@v4
+        with: 
+          name: website-file
 
-    - name: configure aws credentials
+      - name: configure aws credentials
       
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-         aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-         aws-region: ap-south-1
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+           aws-region: ap-south-1
 
-    - name: deploy files to s3 bucket
-      run: aws s3 sync . s3://amazon-s3-bucket12354
+      - name: deploy files to s3 bucket
+        run: aws s3 sync . s3://amazon-s3-bucket12354
       
     
 
