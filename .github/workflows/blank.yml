@@ -1,27 +1,25 @@
 name: cipipeline
+
 on: 
   push: 
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  workflow_dispatch:
+  workflow_dispatch: 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-         - uses: actions/checkout@v4
-         - name: print hello
-           run: echo "hello world"
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm test
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - run: ./deploy.sh
       
+      - name: copy code to github
+        uses: actions/checkout@v4
+      - name: verify files
+        run: |
+          echo "list the files"
+          ls
+      - name: validate if html.index exist or not
+        run: |
+          if [ ! -f index.html ]; then echo "index.html not exist"
+            exit 1
+          fi
+          
+          
