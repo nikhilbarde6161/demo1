@@ -12,12 +12,13 @@ jobs:
       - name: checkout code
         uses:  actions/checkout@v4
 
-      - name: print current directory
-        run: pwd
-
-      - name: list files
-        run: ls -la
-
-      - name: print current date
-        run: date
-    
+      - name: list the files
+        run: echo "list the files" ls
+              
+      - name: check whether the index.html exist or not
+        run: if [ ! -f index.html ]; echo then "index.html does not exist"
+             exit1
+             fi
+      - name: upload artifacts
+        uses: action/upload-artifact@v4
+        
