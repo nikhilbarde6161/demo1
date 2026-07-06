@@ -1,21 +1,23 @@
-name: Print workspace info
+name: ci pipeline
 
-on:
-  push:
-  workflow_dispatch:
+on: 
+  push: 
+    workflow_dispatch:
 
 jobs:
-  print-info:
-    runs-on: ubuntu-latest
+  build:
+    uses: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: checkout code
+        run : actions/checkout@v4
 
-      - name: Print current directory
-        run: pwd
+      - name: print current directory
+        run : pwd
 
-      - name: List files
-        run: ls -la
+      - name: list files
+        run : ls -la
 
-      - name: Print current date
-        run: date
+      - name: print current date
+        run : date
+    
