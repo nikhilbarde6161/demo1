@@ -6,7 +6,7 @@ on:
   workflow_dispatch: 
 
 jobs:
-  build:
+  ci-job:
     runs-on: ubuntu-latest
     steps:
       
@@ -21,5 +21,32 @@ jobs:
           if [ ! -f index.html ]; then echo "index.html not exist"
             exit 1
           fi
+      - name: uploading index.html to artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-file
+          path: |
+            index.html
+
+deployment:
+  needs: ci-job
+  runs-on: ubuntu-latest
+  
+  steps:
+    - name: download artifacts
+      uses: actions/download-artifact@v4
+      with: 
+        name: website-file
+
+    - name: configure aws credentials
+      
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: us-east-2
+    
+    
+
           
           
