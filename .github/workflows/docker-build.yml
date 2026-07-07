@@ -20,7 +20,7 @@ jobs:
       - name: build docker image
         run: docker build -t nikhilbarde6161/githubdemo:latest .
       - name: docker push
-        run: docker push nikhilbarde6161/githubdemo:latest .
+        run: docker push nikhilbarde6161/githubdemo:latest 
         with:
           name: website-file
           path: |
